@@ -10,7 +10,7 @@ class NexaClient:
         "gpt-5-mini-chatgpt",
         "nexa-6.1-code-llm", 
         "nexa-7.0-express"
-    ]
+    ] 
 
     def __init__(self, token: str):
         self.token = token
