@@ -9,7 +9,7 @@ Lyricalabs Nexa, **Lyrica Labs** tarafından geliştirilen geniş veri LLM model
 ```bash
 pip install lyricalabs
 
-
+```
 ---
 
 🔑 API Token Alma
