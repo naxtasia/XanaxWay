@@ -6,7 +6,7 @@ class NexaClient:
     Lyrica Labs Nexa API istemcisi
     """
 
-    BASE_URL = "https://api-lyricalabs.vercel.app/v4/llm/nexa/generative/model/completions"
+    BASE_URL = "https://api.lyricalabs.com/v4/llm/nexa/generative/model/completions"
 
     def __init__(self, token: str):
         self.token = token
