@@ -1,6 +1,6 @@
-# XanaxWay Nexa Python Kütüphanesi
+# XanaxWay AI GateWay Python Kütüphanesi
 
-XanaxWay Nexa, **XanaxWay** tarafından geliştirilen geniş veri LLM modellerine erişim sağlayan Python kütüphanesidir. Bu kütüphane ile **Nexa modellerini kolayca kullanabilir** ve metin üretimi, kod analizi gibi senaryolarda hızlıca entegre edebilirsiniz.
+**XanaxWay** tarafından geliştirilen geniş veri LLM modellerine erişim sağlayan Python kütüphanesidir. Bu kütüphane ile **yapay zeka modellerini kolayca kullanabilir** ve metin üretimi, kod analizi gibi senaryolarda hızlıca entegre edebilirsiniz.
 
 ---
 
@@ -16,13 +16,13 @@ pip install xanaxway
 
 Kütüphaneyi kullanmak için **API** token’a ihtiyacınız var:
 
-1. [XanaxWay Platform](https://xanaxway.com) adresine girin
+1. [XanaxWay Dashboard](https://xanaxway.com/auth) adresine girin
 
 
-2. Kayıt olun ve giriş yapın
+2. GitHub/X/Google/Spotify hesaplarınızın birisi ile kayıt olun veya giriş yapın
 
 
-3. Dashboard’dan [API](https://xanaxway.com/token) token’ınızı alın
+3. Dashboard’dan [API](https://xanaxway.com/dashboard) token’ınızı alın
 
 
 
@@ -31,10 +31,10 @@ Kütüphaneyi kullanmak için **API** token’a ihtiyacınız var:
 
 🚀 Hızlı Başlangıç
 ```python
-from xanaxway import NexaClient
+from xanaxway import aiClient
 
 # API token'ınız ile client oluşturun
-client = NexaClient(token="API_TOKENİNİZ")
+client = aiClient(token="API_TOKENİNİZ")
 
 # Örnek prompt ve parametreler
 prompt = "Python'da yapay zeka uygulamaları nasıl geliştirilir?"
@@ -62,35 +62,10 @@ else:
 
 📚 Mevcut Modeller
 
-| Model | Açıklama | Önerilen Kullanım |
-| :--- | :--- | :--- |
-| nexa-5.0-preview | Genel amaçlı, dengeli model | Her türlü metin üretimi |
-| nexa-3.7-pro | İş odaklı, profesyonel çıktılar | Rapor, e-posta, belge |
-| nexa-6.1-infinity | Büyük bağlam, detaylı analiz | Uzun form içerik, analiz |
-| nexa-7.0-insomnia | Empati ve insan anlama kapasitesi | Duygusal içerik, destek sistemi |
-| nexa-5.0-intimate | Yaratıcı yazım ve duygusal içerik | Hikaye, şiir, yaratıcı yazı |
-| nexa-6.1-code-llm | Kod yazma ve analiz | Programlama, kod analizi |
-| nexa-7.0-express | Hızlı yanıt, düşük gecikme | Chat, hızlı yanıt |
-| gpt-5-mini-chatgpt | ChatGPT uyumlu mini model | ChatGPT benzeri uygulamalar |
+[Modeller sayfasına bakarak modellerin limitlerini ve hangi üyelikleri desteklediklerini görün.](https://docs.xanaxway.com/models/supported-models) 
 
+**XanaxWay** hazır modelleri sunmak ile kalmayıp, kendi modellerinide sunabiliyor, _Nexa ve Wiggly_ modellerinide kullanabilirsiniz. 
 
-
----
-
-⚙️ Parametreler
-
-## 📚 Mevcut Modeller
-
-| Model | Açıklama | Önerilen Kullanım |
-|-------|----------|-----------------|
-| nexa-5.0-preview | Genel amaçlı, dengeli model | Her türlü metin üretimi |
-| nexa-3.7-pro | İş odaklı, profesyonel çıktılar | Rapor, e-posta, belge |
-| nexa-6.1-infinity | Büyük bağlam, detaylı analiz | Uzun form içerik, analiz |
-| nexa-7.0-insomnia | Empati ve insan anlama kapasitesi | Duygusal içerik, destek sistemi |
-| nexa-5.0-intimate | Yaratıcı yazım ve duygusal içerik | Hikaye, şiir, yaratıcı yazı |
-| nexa-6.1-code-llm | Kod yazma ve analiz | Programlama, kod analizi |
-| nexa-7.0-express | Hızlı yanıt, düşük gecikme | Chat, hızlı yanıt |
-| gpt-5-mini-chatgpt | ChatGPT uyumlu mini model | ChatGPT benzeri uygulamalar |
 
 ---
 """
@@ -113,25 +88,13 @@ Kategori: {model_info['category']}
 """)
 ```
 
----
-
-🩺 Sistem Sağlık Kontrolü
-
-```python
-health = client.health_check()
-if health.get("status") == "healthy":
-    print("✅ API bağlantısı başarılı!")
-    print(f"📊 Mevcut model sayısı: {health.get('models_available')}")
-else:
-    print("❌ API bağlantısı sorunlu:", health.get("error"))
-```
 
 ---
 
 ❓ Sık Sorulan Sorular
 
 1. API token’ımı nasıl alırım?
-XanaxWay platformundan kayıt olun ve Token sayfasından token oluşturun.
+XanaxWay platformundan kayıt olun ve Dashboard'dan token oluşturun.
 
 
 2. Hangi modeli kullanmalıyım?
@@ -166,13 +129,7 @@ GitHub Issues: Sorun bildirin
 
 
 
----
-
-📄 Lisans
-
-MIT License. Detaylar için **LICENSE** dosyasına bakın.
 
 
 ---
 
-> 💙 Not: nexa-7.0-insomnia modeli empati ve insan anlama kapasitesine sahip, duygusal destek ve insan etkileşimi gerektiren uygulamalar için idealdir.
