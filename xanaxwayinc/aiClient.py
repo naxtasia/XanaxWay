@@ -1,12 +1,12 @@
 import requests
 from typing import Optional, Dict, Any
 
-class NexaClient:
+class aiClient:
     """
-    XanaxWay Nexa API istemcisi
+    XanaxWay API istemcisi
     """
 
-    BASE_URL = "https://api.xanaxway.com/v4/llm/nexa/generative/model/completions"
+    BASE_URL = "https://api.xanaxway.com/v4/generative/model/completions"
 
     def __init__(self, token: str):
         self.token = token
