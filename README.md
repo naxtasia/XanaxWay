@@ -1,6 +1,6 @@
 # XanaxWay AI GateWay Python Kütüphanesi
 
-**XanaxWay** tarafından geliştirilen geniş veri LLM modellerine erişim sağlayan Python kütüphanesidir. Bu kütüphane ile **yapay zeka modellerini kolayca kullanabilir** ve metin üretimi, kod analizi gibi senaryolarda hızlıca entegre edebilirsiniz.
+**XanaxWay** tarafından sunulan yüzlerce LLM modellerine erişim sağlayan Python kütüphanesidir. Bu kütüphane ile **yapay zeka modellerini kolayca kullanabilir** ve metin üretimi, kod analizi gibi senaryolarda hızlıca entegre edebilirsiniz.
 
 ---
 
