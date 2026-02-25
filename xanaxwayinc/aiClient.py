@@ -1,11 +1,7 @@
 import requests
-from typing import Optional, Dict, Any
+from typing import List, Dict, Any, Optional
 
 class aiClient:
-    """
-    XanaxWay API istemcisi
-    """
-
     BASE_URL = "https://api.xanaxway.com/v4/generative/model/completions"
 
     def __init__(self, token: str):
@@ -13,43 +9,37 @@ class aiClient:
 
     def generate(
         self,
-        prompt: str,
-        model: str = "nexa-7.0-express",
-        temperature: float = 0.9,
-        max_tokens: int = 4098,
-        top_p: float = 0.95,
-        frequency_penalty: float = 0.2,
-        presence_penalty: float = 0.1,
-        custom_system_instruction: Optional[str] = None
+        messages: List[Dict[str, str]],
+        model: str,
+        temperature: float = 0.7,
+        max_tokens: int = 1024,
+        top_p: float = 0.9,
+        stream: bool = False
     ) -> Dict[str, Any]:
-        """
-        Nexa modelinden yanıt üretir.
-        """
         
         headers = {
-            "X-API-Key": self.token,
+            "Authorization": f"Bearer {self.token}",
             "Content-Type": "application/json"
         }
 
         payload = {
-            "prompt": prompt,
             "model": model,
-            "temperature": temperature,
-            "max_tokens": max_tokens,
-            "top_p": top_p,
-            "frequency_penalty": frequency_penalty,
-            "presence_penalty": presence_penalty,
-            "custom_system_instruction": custom_system_instruction
+            "messages": messages,
+            "generation_config": {
+                "temperature": temperature,
+                "max_tokens": max_tokens,
+                "top_p": top_p
+            },
+            "stream": stream
         }
 
-        response = requests.post(self.BASE_URL, json=payload, headers=headers)
         try:
-            data = response.json()
-        except Exception:
+            response = requests.post(self.BASE_URL, json=payload, headers=headers)
+            response.raise_for_status()
+            return response.json()
+        except requests.exceptions.RequestException as e:
             return {
                 "status": "Error",
-                "message": "API yanıtı okunamadı",
-                "raw_response": response.text
+                "message": str(e),
+                "raw_response": getattr(response, 'text', '')
             }
-
-        return data
