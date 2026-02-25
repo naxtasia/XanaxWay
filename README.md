@@ -16,7 +16,7 @@ pip install xanaxway
 
 Kütüphaneyi kullanmak için **API** token’a ihtiyacınız var:
 
-1. [XanaxWay Dashboard](https://xanaxway.com/auth) adresine girin
+1. [XanaxWay Dashboard](https://xanaxway.com/auth/login) adresine girin
 
 
 2. GitHub/X/Google/Spotify hesaplarınızın birisi ile kayıt olun veya giriş yapın
@@ -36,26 +36,29 @@ from xanaxway import aiClient
 # API token'ınız ile client oluşturun
 client = aiClient(token="API_TOKENİNİZ")
 
-# Örnek prompt ve parametreler
-prompt = "Python'da yapay zeka uygulamaları nasıl geliştirilir?"
+# Mesaj geçmişi formatında yapı (System ve User rolleri ile)
+messages = [
+    {"role": "system", "content": "Cevapları Türkçe ve samimi ver."},
+    {"role": "user", "content": "Python'da yapay zeka uygulamaları nasıl geliştirilir?"}
+]
 
+# Yanıt üretme
 response = client.generate(
-    prompt=prompt,
-    model="nexa-7.0-express",      # Hızlı yanıt modeli
-    temperature=0.6,               # Yaratıcılık seviyesi
-    max_tokens=500,                # Üretilecek maksimum token
-    top_p=0.95,                    # Çeşitlilik kontrolü
-    frequency_penalty=0.2,         # Tekrar cezası
-    presence_penalty=0.1,          # Yeni konu ödülü
-    custom_system_instruction="Cevapları Türkçe ve samimi ver."  # Opsiyonel sistem talimatı
+    messages=messages,
+    model="sambanova/deepseek-v3",  # Kullanmak istediğiniz model ismi
+    temperature=0.7,               # Yaratıcılık seviyesi (0.0 - 1.0)
+    max_tokens=1024,               # Üretilecek maksimum token sayısı
+    top_p=0.9                      # Çeşitlilik kontrolü
 )
 
-if response.get("basarilimi"):
-    print("✅ Yanıt:\n", response.get("output"))
+# Yanıtı kontrol etme
+if "choices" in response:
+    content = response["choices"][0]["message"]["content"]
+    print("✅ Yanıt:\n", content)
 else:
     print("❌ Hata oluştu:")
     print(response.get("message"))
-    print("Raw response:", response.get("raw_response"))
+
 ```
 
 ---
@@ -64,7 +67,7 @@ else:
 
 [Modeller sayfasına bakarak modellerin limitlerini ve hangi üyelikleri desteklediklerini görün.](https://docs.xanaxway.com/models/supported-models) 
 
-**XanaxWay** hazır modelleri sunmak ile kalmayıp, kendi modellerinide sunabiliyor, _Nexa ve Wiggly_ modellerinide kullanabilirsiniz. 
+**XanaxWay** hazır modelleri sunmak ile kalmayıp, kendi modellerinide sunabiliyor, _Nexa, Alyx ve Wiggly_ modellerinide kullanabilirsiniz. 
 
 
 ---
@@ -80,14 +83,21 @@ for model, desc in models.items():
     print(f"{model}: {desc}")
 
 # Belirli bir model hakkında detaylı bilgi
-model_info = client.get_model_info("nexa-7.0-insomnia")
+model_info = client.get_model_info("alyx-ix")
 print(f"""
 Model: {model_info['name']}
 Açıklama: {model_info['description']}
 Kategori: {model_info['category']}
 """)
 ```
-
+###💡 İpucu: Sistem Talimatları (System Instructions)
+​Eski sürümdeki custom_system_instruction parametresi yerine, artık messages listesinin en başına bir system rolü ekleyerek modelin davranışını belirleyebilirsiniz:
+```python
+messages = [
+    {"role": "system", "content": "Sen bir yazılım uzmanısın. Sadece kod blokları ile cevap ver."},
+    {"role": "user", "content": "Python ile ekrana 'Merhaba' yazdır."}
+]
+```
 
 ---
 
